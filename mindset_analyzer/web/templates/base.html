@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/logo.svg') }}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -14,7 +15,10 @@
         <!-- Sidebar -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3><i class='bx bx-brain'></i> Mindset Analyzer</h3>
+                <div class="logo-container">
+                    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Mindset Analyzer Logo" class="logo">
+                    <span class="logo-text">Mindset Analyzer</span>
+                </div>
             </div>
 
             <ul class="list-unstyled components">
