@@ -3,252 +3,131 @@
 {% block title %}Dashboard - Mindset Analyzer{% endblock %}
 
 {% block content %}
-<!-- Metrics Section -->
-<div class="row mb-4">
-    <div class="col-md-3">
-        <div class="metric-card">
-            <div class="metric-icon">
-                <i class='bx bx-happy-alt'></i>
-            </div>
-            <h6 class="text-muted mb-2">Mood Score</h6>
-            <div class="metric-value mood-score">85%</div>
-            <div class="metric-change positive">
-                <div class="change-indicator">
-                    <i class='bx bx-up-arrow-alt'></i>
-                    <span>5%</span>
+<div class="container-fluid">
+    <!-- Live Data Status -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <h5 class="m-0" id="connection-status">Status: Connecting...</h5>
+                    <span class="text-muted" id="last-update">Last updated: --:--:--</span>
                 </div>
-                <div class="change-trend">
-                    <div class="trend-line positive"></div>
-                </div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 85%"></div>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="metric-card">
-            <div class="metric-icon">
-                <i class='bx bx-bolt'></i>
-            </div>
-            <h6 class="text-muted mb-2">Energy Level</h6>
-            <div class="metric-value energy-level">72%</div>
-            <div class="metric-change negative">
-                <div class="change-indicator">
-                    <i class='bx bx-down-arrow-alt'></i>
-                    <span>3%</span>
-                </div>
-                <div class="change-trend">
-                    <div class="trend-line negative"></div>
-                </div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 72%"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="metric-card">
-            <div class="metric-icon">
-                <i class='bx bx-target-lock'></i>
-            </div>
-            <h6 class="text-muted mb-2">Focus Level</h6>
-            <div class="metric-value focus-level">68%</div>
-            <div class="metric-change positive">
-                <div class="change-indicator">
-                    <i class='bx bx-up-arrow-alt'></i>
-                    <span>2%</span>
-                </div>
-                <div class="change-trend">
-                    <div class="trend-line positive"></div>
-                </div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 68%"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="metric-card">
-            <div class="metric-icon">
-                <i class='bx bx-heart'></i>
-            </div>
-            <h6 class="text-muted mb-2">Stress Level</h6>
-            <div class="metric-value stress-level">45%</div>
-            <div class="metric-change negative">
-                <div class="change-indicator">
-                    <i class='bx bx-up-arrow-alt'></i>
-                    <span>8%</span>
-                </div>
-                <div class="change-trend">
-                    <div class="trend-line negative"></div>
-                </div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 45%"></div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Change Analysis Section -->
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card change-analysis-card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h5 class="card-title">Change Analysis</h5>
-                    <div class="time-period">
-                        <span class="badge bg-light text-dark">Last 7 Days</span>
+    <!-- Live Metrics Row -->
+    <div class="row">
+        <!-- Mindset Score -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Mindset Score</div>
+                            <div class="h1 mb-0 font-weight-bold" id="mindset-score">--</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-brain fa-2x text-gray-300"></i>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="change-factors">
-                            <h6 class="mb-3">Key Factors Contributing to Changes</h6>
-                            <div class="list-group">
-                                <div class="list-group-item factor-item">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="factor-info">
-                                            <div class="factor-icon">
-                                                <i class='bx bx-sun'></i>
-                                            </div>
-                                            <div class="factor-details">
-                                                <span class="factor-name">Sleep Quality</span>
-                                                <div class="factor-progress">
-                                                    <div class="progress-bar bg-success" style="width: 85%"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <span class="badge bg-success">+15%</span>
-                                    </div>
-                                </div>
-                                <div class="list-group-item factor-item">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="factor-info">
-                                            <div class="factor-icon">
-                                                <i class='bx bx-run'></i>
-                                            </div>
-                                            <div class="factor-details">
-                                                <span class="factor-name">Physical Activity</span>
-                                                <div class="factor-progress">
-                                                    <div class="progress-bar bg-success" style="width: 65%"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <span class="badge bg-success">+8%</span>
-                                    </div>
-                                </div>
-                                <div class="list-group-item factor-item">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="factor-info">
-                                            <div class="factor-icon">
-                                                <i class='bx bx-group'></i>
-                                            </div>
-                                            <div class="factor-details">
-                                                <span class="factor-name">Social Interaction</span>
-                                                <div class="factor-progress">
-                                                    <div class="progress-bar bg-danger" style="width: 35%"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <span class="badge bg-danger">-5%</span>
+            </div>
+        </div>
+
+        <!-- Focus Level -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Focus Level</div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col">
+                                    <div class="progress progress-sm mr-2">
+                                        <div class="progress-bar bg-success" id="focus-level" role="progressbar" style="width: 0%"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-auto">
+                            <i class="fas fa-bullseye fa-2x text-gray-300"></i>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="change-insights">
-                            <h6 class="mb-3">Insights</h6>
-                            <div class="list-group">
-                                <div class="list-group-item insight-item">
-                                    <div class="insight-icon">
-                                        <i class='bx bx-bulb'></i>
-                                    </div>
-                                    <div class="insight-content">
-                                        <span class="insight-text">Improved sleep patterns have positively impacted your overall mood and energy levels.</span>
-                                        <div class="insight-impact positive">
-                                            <i class='bx bx-up-arrow-alt'></i>
-                                            <span>Strong Impact</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-group-item insight-item">
-                                    <div class="insight-icon">
-                                        <i class='bx bx-bulb'></i>
-                                    </div>
-                                    <div class="insight-content">
-                                        <span class="insight-text">Increased physical activity has contributed to better focus and reduced stress.</span>
-                                        <div class="insight-impact positive">
-                                            <i class='bx bx-up-arrow-alt'></i>
-                                            <span>Moderate Impact</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-group-item insight-item">
-                                    <div class="insight-icon">
-                                        <i class='bx bx-bulb'></i>
-                                    </div>
-                                    <div class="insight-content">
-                                        <span class="insight-text">Decreased social interactions may be affecting your stress levels.</span>
-                                        <div class="insight-impact negative">
-                                            <i class='bx bx-down-arrow-alt'></i>
-                                            <span>Negative Impact</span>
-                                        </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Energy Level -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Energy Level</div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col">
+                                    <div class="progress progress-sm mr-2">
+                                        <div class="progress-bar bg-warning" id="energy-level" role="progressbar" style="width: 0%"></div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-bolt fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Mood -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Current Mood</div>
+                            <div class="h5 mb-0 font-weight-bold">
+                                <span id="mood-indicator" class="badge bg-secondary">--</span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-smile fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Charts Section -->
-<div class="row mb-4">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Daily Patterns</h5>
-                <div class="chart-container">
-                    <canvas id="dailyPatternsChart"></canvas>
+    <!-- Charts Row -->
+    <div class="row">
+        <!-- Mindset Trend Chart -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Mindset Trend</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="mindsetTrendChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Correlations</h5>
-                <div class="chart-container">
-                    <canvas id="correlationsChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Insights and Recommendations -->
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Current Insights</h5>
-                <div class="list-group" id="insights-list">
-                    <!-- Insights will be populated here -->
+        <!-- Stress Level -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Stress Level</h6>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Recommendations</h5>
-                <div class="list-group" id="recommendations-list">
-                    <!-- Recommendations will be populated here -->
+                <div class="card-body">
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-danger" id="stress-level" role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <p class="text-center text-muted">Real-time stress level indicator</p>
                 </div>
             </div>
         </div>
@@ -256,7 +135,8 @@
 </div>
 {% endblock %}
 
-{% block extra_js %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endblock %} 

@@ -65,6 +65,112 @@ const chartConfigs = {
     }
 };
 
+// Initialize Socket.IO connection
+const socket = io();
+
+// Live data update handlers
+socket.on('connect', () => {
+    console.log('Connected to server');
+    updateConnectionStatus('Connected');
+});
+
+socket.on('disconnect', () => {
+    console.log('Disconnected from server');
+    updateConnectionStatus('Disconnected');
+});
+
+socket.on('live_data_update', (data) => {
+    updateDashboard(data);
+});
+
+function updateConnectionStatus(status) {
+    const statusElement = document.getElementById('connection-status');
+    if (statusElement) {
+        statusElement.textContent = `Status: ${status}`;
+        statusElement.className = status === 'Connected' ? 'text-success' : 'text-danger';
+    }
+}
+
+function updateDashboard(data) {
+    // Update mindset score
+    const mindsetScore = document.getElementById('mindset-score');
+    if (mindsetScore) {
+        mindsetScore.textContent = data.mindset_score;
+        mindsetScore.style.color = data.mindset_score >= 80 ? '#1cc88a' : '#e74a3b';
+    }
+
+    // Update focus level
+    const focusLevel = document.getElementById('focus-level');
+    if (focusLevel) {
+        focusLevel.style.width = `${data.focus_level}%`;
+        focusLevel.textContent = `${data.focus_level}%`;
+    }
+
+    // Update energy level
+    const energyLevel = document.getElementById('energy-level');
+    if (energyLevel) {
+        energyLevel.style.width = `${data.energy_level}%`;
+        energyLevel.textContent = `${data.energy_level}%`;
+    }
+
+    // Update stress level
+    const stressLevel = document.getElementById('stress-level');
+    if (stressLevel) {
+        stressLevel.style.width = `${data.stress_level}%`;
+        stressLevel.textContent = `${data.stress_level}%`;
+    }
+
+    // Update mood
+    const moodIndicator = document.getElementById('mood-indicator');
+    if (moodIndicator) {
+        moodIndicator.textContent = data.mood;
+        moodIndicator.className = `badge ${getMoodClass(data.mood)}`;
+    }
+
+    // Update timestamp
+    const lastUpdate = document.getElementById('last-update');
+    if (lastUpdate) {
+        lastUpdate.textContent = `Last updated: ${data.timestamp}`;
+    }
+
+    // Animate the updates
+    animateValue('mindset-score');
+}
+
+function getMoodClass(mood) {
+    const moodClasses = {
+        'Positive': 'bg-success',
+        'Neutral': 'bg-info',
+        'Focused': 'bg-primary',
+        'Energetic': 'bg-warning'
+    };
+    return moodClasses[mood] || 'bg-secondary';
+}
+
+function animateValue(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.classList.add('pulse-animation');
+        setTimeout(() => {
+            element.classList.remove('pulse-animation');
+        }, 1000);
+    }
+}
+
+// Add pulse animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    .pulse-animation {
+        animation: pulse 1s ease-in-out;
+    }
+`;
+document.head.appendChild(style);
+
 // Initialize charts when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize charts
@@ -204,4 +310,58 @@ function showError(message) {
 }
 
 // Refresh data periodically (every 5 minutes)
-setInterval(loadDashboardData, 5 * 60 * 1000); 
+setInterval(loadDashboardData, 5 * 60 * 1000);
+
+// Initialize charts with live data
+function initializeCharts() {
+    // Mindset Trend Chart
+    const ctx = document.getElementById('mindsetTrendChart');
+    if (ctx) {
+        const mindsetChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Mindset Score',
+                    data: [],
+                    borderColor: '#4e73df',
+                    backgroundColor: 'rgba(78, 115, 223, 0.05)',
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        // Update chart with live data
+        socket.on('live_data_update', (data) => {
+            const maxDataPoints = 10;
+            
+            mindsetChart.data.labels.push(data.timestamp);
+            mindsetChart.data.datasets[0].data.push(data.mindset_score);
+
+            if (mindsetChart.data.labels.length > maxDataPoints) {
+                mindsetChart.data.labels.shift();
+                mindsetChart.data.datasets[0].data.shift();
+            }
+
+            mindsetChart.update();
+        });
+    }
+}
+
+// Initialize charts when the document is ready
+document.addEventListener('DOMContentLoaded', initializeCharts); 
