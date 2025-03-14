@@ -1,5 +1,5 @@
 """
-Web interface for the Mindset Analyzer
+Web package for the mindset analyzer application.
 """ 
 
 from flask import Flask
@@ -14,3 +14,5 @@ def create_app():
     return app 
 
 # Web package initialization 
+
+# This file makes the web directory a Python package 

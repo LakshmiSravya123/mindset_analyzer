@@ -1,20 +1,182 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard - Mindset Analyzer{% endblock %}
+{% block title %}
+    {% if mode == 'spiritual' %}
+        Spiritual Mode - Mindset Analyzer
+    {% elif mode == 'energy' %}
+        Energy Mode - Mindset Analyzer
+    {% elif mode == 'travel' %}
+        Travel Mode - Mindset Analyzer
+    {% elif mode == 'creative' %}
+        Creative Mode - Mindset Analyzer
+    {% elif mode == 'learning' %}
+        Learning Mode - Mindset Analyzer
+    {% else %}
+        Dashboard - Mindset Analyzer
+    {% endif %}
+{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
-    <!-- Live Data Status -->
+    <!-- Mode-specific Header -->
     <div class="row mb-4">
         <div class="col-12">
             <div class="card shadow">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                    <h5 class="m-0" id="connection-status">Status: Connecting...</h5>
-                    <span class="text-muted" id="last-update">Last updated: --:--:--</span>
+                <div class="card-body">
+                    {% if mode == 'spiritual' %}
+                        <h3 class="text-primary">Spiritual Mode</h3>
+                        <p>Focus on mindfulness, meditation, and inner peace.</p>
+                    {% elif mode == 'energy' %}
+                        <h3 class="text-success">Energy Mode</h3>
+                        <p>Track and optimize your physical and mental energy levels.</p>
+                    {% elif mode == 'travel' %}
+                        <h3 class="text-info">Travel Mode</h3>
+                        <p>Plan and track your journeys for mindful exploration.</p>
+                    {% elif mode == 'creative' %}
+                        <h3 class="text-warning">Creative Mode</h3>
+                        <p>Unleash your creative potential and track artistic progress.</p>
+                    {% elif mode == 'learning' %}
+                        <h3 class="text-danger">Learning Mode</h3>
+                        <p>Monitor your learning journey and knowledge acquisition.</p>
+                    {% else %}
+                        <h3 class="text-primary">Dashboard Overview</h3>
+                        <p>Your complete mindset analytics at a glance.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Daily Wisdom Card -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow wisdom-card">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-3">Daily Wisdom</h5>
+                    <p class="wisdom-quote mb-2 font-italic">"The mind is everything. What you think you become."</p>
+                    <p class="wisdom-author text-muted">- Buddha</p>
+                    <small class="text-muted mt-2 d-block">Click to get new wisdom</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mode-specific Content -->
+    {% if mode == 'spiritual' %}
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5>Meditation Timer</h5>
+                        <div class="text-center">
+                            <div class="display-4" id="meditation-timer">00:00</div>
+                            <button class="btn btn-primary mt-3" onclick="toggleMeditation()">Start Meditation</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5>Mindfulness Log</h5>
+                        <div id="mindfulness-log">
+                            <p>Track your daily mindfulness practice here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif mode == 'energy' %}
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5>Energy Tracking</h5>
+                        <canvas id="energy-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5>Activity Log</h5>
+                        <div id="activity-log">
+                            <p>Log your daily activities and energy levels.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif mode == 'travel' %}
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5>Travel Plans</h5>
+                        <div id="travel-plans">
+                            <p>Plan your mindful journeys here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5>Journey Log</h5>
+                        <div id="journey-log">
+                            <p>Record your travel experiences and insights.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif mode == 'creative' %}
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5>Creative Projects</h5>
+                        <div id="creative-projects">
+                            <p>Track your creative projects and inspiration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5>Inspiration Board</h5>
+                        <div id="inspiration-board">
+                            <p>Collect and organize your creative inspiration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif mode == 'learning' %}
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5>Study Tracker</h5>
+                        <div id="study-tracker">
+                            <p>Monitor your learning progress.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5>Knowledge Map</h5>
+                        <div id="knowledge-map">
+                            <p>Visualize your learning journey.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
     <!-- Live Metrics Row -->
     <div class="row">
@@ -136,7 +298,6 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endblock %} 
