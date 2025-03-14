@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+
+{% block title %}Sacred Texts - Mindset Analyzer{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Sacred Texts Overview Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class='bx bx-book-open'></i> Sacred Texts Overview</h5>
+                    <div class="time-period">
+                        <span class="badge bg-primary">Daily Wisdom</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="metric-card">
+                                <div class="metric-icon">
+                                    <i class='bx bx-book-reader'></i>
+                                </div>
+                                <h6>Daily Verses</h6>
+                                <div class="metric-value">3</div>
+                                <div class="metric-change positive">
+                                    <i class='bx bx-up-arrow-alt'></i> New verses today
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="metric-card">
+                                <div class="metric-icon">
+                                    <i class='bx bx-time'></i>
+                                </div>
+                                <h6>Reading Time</h6>
+                                <div class="metric-value">15m</div>
+                                <div class="metric-change positive">
+                                    <i class='bx bx-up-arrow-alt'></i> 5m more than yesterday
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="metric-card">
+                                <div class="metric-icon">
+                                    <i class='bx bx-bookmark'></i>
+                                </div>
+                                <h6>Saved Verses</h6>
+                                <div class="metric-value">25</div>
+                                <div class="metric-change positive">
+                                    <i class='bx bx-up-arrow-alt'></i> 2 new this week
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Wisdom Section -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-bulb'></i> Daily Wisdom</h5>
+                </div>
+                <div class="card-body">
+                    <div class="daily-wisdom">
+                        <div class="wisdom-selector mb-3">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-outline-primary active" data-text="gita">Bhagavad Gita</button>
+                                <button type="button" class="btn btn-outline-primary" data-text="bible">Bible</button>
+                                <button type="button" class="btn btn-outline-primary" data-text="quran">Quran</button>
+                            </div>
+                        </div>
+                        <div class="wisdom-content">
+                            <blockquote class="gita-verse">
+                                "It is better to live your own destiny imperfectly than to live an imitation of somebody else's life with perfection."
+                            </blockquote>
+                            <div class="verse-reference">
+                                <span class="text-muted">Bhagavad Gita 3.35</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-bookmark'></i> Saved Verses</h5>
+                </div>
+                <div class="card-body">
+                    <div class="saved-verses">
+                        <div class="verse-item">
+                            <div class="verse-text">"The soul is neither born, nor does it die."</div>
+                            <div class="verse-meta">
+                                <span class="verse-source">Bhagavad Gita 2.20</span>
+                                <button class="btn btn-link btn-sm"><i class='bx bx-bookmark'></i></button>
+                            </div>
+                        </div>
+                        <div class="verse-item">
+                            <div class="verse-text">"Love your neighbor as yourself."</div>
+                            <div class="verse-meta">
+                                <span class="verse-source">Mark 12:31</span>
+                                <button class="btn btn-link btn-sm"><i class='bx bx-bookmark'></i></button>
+                            </div>
+                        </div>
+                        <div class="verse-item">
+                            <div class="verse-text">"Indeed, with hardship will be ease."</div>
+                            <div class="verse-meta">
+                                <span class="verse-source">Quran 94:5</span>
+                                <button class="btn btn-link btn-sm"><i class='bx bx-bookmark'></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sacred Texts Library Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-library'></i> Sacred Texts Library</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-card">
+                                <div class="text-icon">
+                                    <i class='bx bx-book-open'></i>
+                                </div>
+                                <h6>Bhagavad Gita</h6>
+                                <p>18 chapters of divine wisdom</p>
+                                <div class="text-progress mb-3">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%">
+                                            75%
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary w-100">Read Gita</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-card">
+                                <div class="text-icon">
+                                    <i class='bx bx-book-open'></i>
+                                </div>
+                                <h6>Bible</h6>
+                                <p>Old and New Testament</p>
+                                <div class="text-progress mb-3">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 60%">
+                                            60%
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary w-100">Read Bible</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-card">
+                                <div class="text-icon">
+                                    <i class='bx bx-book-open'></i>
+                                </div>
+                                <h6>Quran</h6>
+                                <p>114 surahs of divine guidance</p>
+                                <div class="text-progress mb-3">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 45%">
+                                            45%
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary w-100">Read Quran</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Study Tools Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-tools'></i> Study Tools</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="tool-card">
+                                <div class="tool-icon">
+                                    <i class='bx bx-search'></i>
+                                </div>
+                                <h6>Verse Search</h6>
+                                <p>Find specific verses</p>
+                                <button class="btn btn-primary w-100">Search</button>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="tool-card">
+                                <div class="tool-icon">
+                                    <i class='bx bx-book-content'></i>
+                                </div>
+                                <h6>Commentaries</h6>
+                                <p>Read interpretations</p>
+                                <button class="btn btn-primary w-100">View</button>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="tool-card">
+                                <div class="tool-icon">
+                                    <i class='bx bx-group'></i>
+                                </div>
+                                <h6>Study Groups</h6>
+                                <p>Join discussions</p>
+                                <button class="btn btn-primary w-100">Join</button>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="tool-card">
+                                <div class="tool-icon">
+                                    <i class='bx bx-note'></i>
+                                </div>
+                                <h6>Notes</h6>
+                                <p>Personal reflections</p>
+                                <button class="btn btn-primary w-100">Write</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Wisdom selector functionality
+    const wisdomButtons = document.querySelectorAll('.wisdom-selector .btn');
+    const wisdomContent = document.querySelector('.wisdom-content');
+    
+    wisdomButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            wisdomButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Update content based on selected text
+            const textType = this.dataset.text;
+            updateWisdomContent(textType);
+        });
+    });
+    
+    function updateWisdomContent(textType) {
+        const verses = {
+            gita: {
+                text: "It is better to live your own destiny imperfectly than to live an imitation of somebody else's life with perfection.",
+                reference: "Bhagavad Gita 3.35"
+            },
+            bible: {
+                text: "For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life.",
+                reference: "John 3:16"
+            },
+            quran: {
+                text: "Indeed, with hardship will be ease.",
+                reference: "Quran 94:5"
+            }
+        };
+        
+        const verse = verses[textType];
+        wisdomContent.innerHTML = `
+            <blockquote class="${textType}-verse">
+                "${verse.text}"
+            </blockquote>
+            <div class="verse-reference">
+                <span class="text-muted">${verse.reference}</span>
+            </div>
+        `;
+    }
+});
+</script>
+{% endblock %} 

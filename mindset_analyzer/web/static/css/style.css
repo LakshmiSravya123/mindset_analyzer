@@ -1,5 +1,6 @@
 /* CSS Variables */
 :root {
+    /* Light Theme Colors (default) */
     --primary-color: #4e73df;
     --secondary-color: #858796;
     --accent-color: #1cc88a;
@@ -11,23 +12,50 @@
     --primary-text: #4e73df;
     --secondary-text: #858796;
     --border-color: #e3e6f0;
+    --card-bg: #ffffff;
+    --text-color: #2e2f37;
+    --navbar-bg: #ffffff;
+    --sidebar-hover: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark Theme Colors */
+[data-theme="dark"] {
+    --primary-color: #6f86e0;
+    --secondary-color: #9fa6b7;
+    --accent-color: #25dfa3;
+    --success-color: #25dfa3;
+    --warning-color: #f8d876;
+    --danger-color: #ef6a5e;
+    --light-bg: #1a1c23;
+    --dark-bg: #2e2f37;
+    --primary-text: #6f86e0;
+    --secondary-text: #9fa6b7;
+    --border-color: #3d3f47;
+    --card-bg: #2e2f37;
+    --text-color: #ffffff;
+    --navbar-bg: #2e2f37;
+    --sidebar-hover: rgba(255, 255, 255, 0.1);
 }
 
 /* Global Styles */
 body {
     font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: var(--light-bg);
-    color: var(--dark-bg);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Sidebar Styles */
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: var(--primary-color);
+    background: var(--dark-bg);
     color: #fff;
     transition: all 0.3s;
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(0, 0, 0, 0.15);
+    position: fixed;
+    height: 100vh;
+    z-index: 1000;
 }
 
 #sidebar.active {
@@ -62,28 +90,29 @@ body {
 
 /* Content Area Styles */
 #content {
-    width: 100%;
-    padding: 20px;
+    width: calc(100% - 250px);
     min-height: 100vh;
     transition: all 0.3s;
+    margin-left: 250px;
+    padding: 20px;
 }
 
 /* Navbar Styles */
 .navbar {
     padding: 15px 10px;
-    background: #fff;
+    background: var(--card-bg);
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(0, 0, 0, 0.15);
 }
 
 /* Card Styles */
 .card {
-    background: #fff;
+    background: var(--card-bg);
     border: none;
     border-radius: 0.35rem;
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(0, 0, 0, 0.15);
     margin-bottom: 1.5rem;
     transition: transform 0.2s ease-in-out;
 }
@@ -93,7 +122,7 @@ body {
 }
 
 .card-header {
-    background-color: #f8f9fc;
+    background-color: rgba(0, 0, 0, 0.05);
     border-bottom: 1px solid var(--border-color);
     padding: 1rem;
 }
@@ -106,14 +135,17 @@ body {
 .metric-card {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(145deg, #ffffff, #f8f9fc);
-    border: 1px solid rgba(78, 115, 223, 0.1);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.25rem;
+    border-radius: 0.35rem;
     transition: all 0.3s ease;
+    height: 100%;
 }
 
 .metric-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(78, 115, 223, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .metric-icon {
@@ -122,7 +154,7 @@ body {
     right: 1rem;
     width: 40px;
     height: 40px;
-    background: rgba(78, 115, 223, 0.1);
+    background: rgba(var(--primary-color-rgb), 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -141,18 +173,17 @@ body {
 .metric-value {
     font-size: 2.5rem;
     font-weight: 700;
-    background: linear-gradient(45deg, var(--primary-color), #2e59d9);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--primary-color);
     margin: 1rem 0;
 }
 
 /* Progress Bar Styles */
 .progress {
     height: 0.5rem;
-    background-color: #e3e6f0;
+    background-color: var(--border-color);
     border-radius: 0.35rem;
     margin-top: 0.5rem;
+    overflow: hidden;
 }
 
 .progress-bar {
@@ -166,6 +197,7 @@ body {
     position: relative;
     height: 300px;
     width: 100%;
+    margin: 1rem 0;
 }
 
 /* List Group Styles */
@@ -312,40 +344,130 @@ body {
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
-    }
-    #sidebar.active {
-        margin-left: 0;
-    }
-    #content {
-        width: 100%;
-    }
+@media (max-width: 1200px) {
     .metric-card {
         margin-bottom: 1rem;
     }
+    
     .chart-container {
         height: 250px;
     }
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
+@media (max-width: 992px) {
+    #sidebar {
+        margin-left: -250px;
+        position: fixed;
+        z-index: 1030;
+    }
+    
+    #sidebar.active {
+        margin-left: 0;
+    }
+    
+    #content {
+        width: 100%;
+        margin-left: 0;
+        transition: all 0.3s;
+    }
+    
+    #content.active {
+        margin-left: 250px;
+    }
+    
+    .navbar {
+        padding: 15px;
+    }
+    
+    .metric-card {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .chart-container {
+        height: 250px;
+    }
+    
+    .metric-value {
+        font-size: 2rem;
+    }
+    
+    #content.active {
+        margin-left: 0;
+    }
+    
+    .navbar .container-fluid {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .metric-card {
+        padding: 1rem;
+    }
+    
+    .metric-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+    
+    .chart-container {
+        height: 200px;
+    }
+    
+    .navbar {
+        padding: 10px;
+    }
+}
+
+/* Dark Mode Specific Styles */
+[data-theme="dark"] .navbar {
+    background: var(--navbar-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .metric-card,
+[data-theme="dark"] .factor-item,
+[data-theme="dark"] .insight-item,
+[data-theme="dark"] .list-group-item {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .list-group-item:hover {
+    background: var(--dark-bg);
+}
+
+[data-theme="dark"] .btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+/* Custom Scrollbar for Dark Mode */
+[data-theme="dark"] ::-webkit-scrollbar {
     width: 8px;
 }
 
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: var(--dark-bg);
 }
 
-::-webkit-scrollbar-thumb {
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
     background: var(--primary-color);
     border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #2e59d9;
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
 }
 
 /* Animations */
@@ -469,17 +591,17 @@ body {
 
 /* Enhanced Factor Items */
 .factor-item {
-    border: none;
-    background: white;
-    margin-bottom: 1rem;
-    border-radius: 10px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.35rem;
     padding: 1rem;
+    margin-bottom: 1rem;
     transition: all 0.3s ease;
 }
 
 .factor-item:hover {
     transform: translateX(5px);
-    box-shadow: 0 5px 15px rgba(78, 115, 223, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .factor-info {
@@ -523,17 +645,17 @@ body {
 
 /* Enhanced Insight Items */
 .insight-item {
-    border: none;
-    background: white;
-    margin-bottom: 1rem;
-    border-radius: 10px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.35rem;
     padding: 1rem;
+    margin-bottom: 1rem;
     transition: all 0.3s ease;
 }
 
 .insight-item:hover {
     transform: translateX(5px);
-    box-shadow: 0 5px 15px rgba(78, 115, 223, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .insight-icon {
@@ -578,4 +700,597 @@ body {
 .insight-impact.negative {
     background: rgba(231, 74, 59, 0.1);
     color: var(--danger-color);
+}
+
+/* Spiritual Journey Styles */
+.meditation-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.35rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.meditation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.meditation-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(78, 115, 223, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: var(--primary-color);
+    font-size: 2rem;
+    transition: all 0.3s ease;
+}
+
+.meditation-card:hover .meditation-icon {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+.daily-wisdom {
+    text-align: center;
+}
+
+.daily-wisdom blockquote {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-left: 4px solid var(--primary-color);
+    background: rgba(78, 115, 223, 0.05);
+    border-radius: 0.35rem;
+}
+
+.goal-item {
+    padding: 1rem;
+    background: rgba(78, 115, 223, 0.05);
+    border-radius: 0.35rem;
+    margin-bottom: 1rem;
+}
+
+.goal-item h6 {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.goal-item .progress {
+    height: 0.5rem;
+    background-color: rgba(78, 115, 223, 0.1);
+    border-radius: 0.35rem;
+    margin-bottom: 0.5rem;
+}
+
+.goal-item .progress-bar {
+    background-color: var(--primary-color);
+    border-radius: 0.35rem;
+    transition: width 0.6s ease;
+}
+
+/* Dark Mode Specific Spiritual Styles */
+[data-theme="dark"] .meditation-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .daily-wisdom blockquote {
+    background: rgba(78, 115, 223, 0.1);
+    border-left-color: var(--primary-color);
+}
+
+[data-theme="dark"] .goal-item {
+    background: rgba(78, 115, 223, 0.1);
+}
+
+[data-theme="dark"] .goal-item .progress {
+    background-color: rgba(78, 115, 223, 0.2);
+}
+
+/* Mode Section Styles */
+.mode-section {
+    margin-top: 1rem;
+}
+
+.mode-section a {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.mode-section a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.mode-section .dropdown-toggle::after {
+    float: right;
+    margin-top: 8px;
+}
+
+.mode-section ul.collapse {
+    padding-left: 20px;
+}
+
+.mode-section ul.collapse li a {
+    padding: 8px 20px;
+    font-size: 0.9em;
+}
+
+/* Mode Selector Styles */
+.mode-selector .form-select {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mode-selector .form-select:hover {
+    border-color: var(--primary-color);
+}
+
+.mode-selector .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+/* Energy Mode Styles */
+.energy-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.35rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.energy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.energy-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(78, 115, 223, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: var(--primary-color);
+    font-size: 2rem;
+    transition: all 0.3s ease;
+}
+
+.energy-card:hover .energy-icon {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+.energy-tips .tip-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(78, 115, 223, 0.05);
+    border-radius: 0.35rem;
+    margin-bottom: 0.5rem;
+}
+
+.energy-tips .tip-item i {
+    color: var(--success-color);
+    font-size: 1.2rem;
+}
+
+/* Travel Mode Styles */
+.travel-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.35rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.travel-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.travel-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(78, 115, 223, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: var(--primary-color);
+    font-size: 2rem;
+    transition: all 0.3s ease;
+}
+
+.travel-card:hover .travel-icon {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+.travel-tips .tip-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(78, 115, 223, 0.05);
+    border-radius: 0.35rem;
+    margin-bottom: 0.5rem;
+}
+
+.travel-tips .tip-item i {
+    color: var(--success-color);
+    font-size: 1.2rem;
+}
+
+/* Dark Mode Specific Styles for Modes */
+[data-theme="dark"] .mode-section a {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .mode-section a:hover {
+    background: var(--sidebar-hover);
+}
+
+[data-theme="dark"] .energy-card,
+[data-theme="dark"] .travel-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .energy-tips .tip-item,
+[data-theme="dark"] .travel-tips .tip-item {
+    background: rgba(78, 115, 223, 0.1);
+}
+
+/* Responsive Styles for Modes */
+@media (max-width: 992px) {
+    .mode-selector {
+        margin-bottom: 1rem;
+    }
+    
+    .mode-selector .form-select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .energy-card,
+    .travel-card {
+        margin-bottom: 1rem;
+    }
+    
+    .energy-icon,
+    .travel-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+}
+
+/* Learning Mode Styles */
+.learning-tips {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.tip-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.tip-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tip-item i {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    margin-top: 0.25rem;
+}
+
+.tip-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.learning-card {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.learning-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.learning-icon {
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.learning-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.learning-card h6 {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.learning-card p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+/* Dark Mode Specific Styles */
+[data-theme="dark"] .tip-item {
+    background-color: var(--card-bg-dark);
+}
+
+[data-theme="dark"] .learning-card {
+    background-color: var(--card-bg-dark);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .learning-card {
+        margin-bottom: 1rem;
+    }
+    
+    .tip-item {
+        padding: 0.5rem;
+    }
+}
+
+/* Spiritual Texts Styles */
+.wisdom-selector .btn-group {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.wisdom-selector .btn {
+    flex: 1;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.wisdom-content {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.wisdom-content blockquote {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-left: 4px solid var(--primary-color);
+    background: rgba(78, 115, 223, 0.05);
+    border-radius: 0.35rem;
+}
+
+.verse-reference {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.saved-verses {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.verse-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.35rem;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.verse-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.verse-text {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.verse-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.verse-source {
+    color: var(--text-muted);
+}
+
+.text-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.35rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.text-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.text-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(78, 115, 223, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: var(--primary-color);
+    font-size: 2rem;
+    transition: all 0.3s ease;
+}
+
+.text-card:hover .text-icon {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+.text-card h6 {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.text-card p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.text-progress {
+    margin: 1rem 0;
+}
+
+.tool-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.35rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tool-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(78, 115, 223, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.tool-card:hover .tool-icon {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+.tool-card h6 {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.tool-card p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+/* Dark Mode Specific Styles */
+[data-theme="dark"] .wisdom-content blockquote {
+    background: rgba(78, 115, 223, 0.1);
+    border-left-color: var(--primary-color);
+}
+
+[data-theme="dark"] .verse-item {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .text-card,
+[data-theme="dark"] .tool-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .wisdom-selector .btn-group {
+        flex-direction: column;
+    }
+    
+    .wisdom-content blockquote {
+        font-size: 1.2rem;
+    }
+    
+    .text-card,
+    .tool-card {
+        margin-bottom: 1rem;
+    }
+    
+    .text-icon,
+    .tool-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
 } 
