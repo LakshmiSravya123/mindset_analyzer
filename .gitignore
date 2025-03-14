@@ -24,21 +24,43 @@ wheels/
 venv/
 env/
 ENV/
+.env
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+.DS_Store
 
 # Project specific
 data/
 models/
-visualizations/
-*.csv
-*.h5
-*.npy
+logs/
+*.db
+*.sqlite3
 
-# OS specific
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Distribution
+dist/
+build/
+*.egg-info/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Local development
+*.log
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# System Files
 .DS_Store
 Thumbs.db 

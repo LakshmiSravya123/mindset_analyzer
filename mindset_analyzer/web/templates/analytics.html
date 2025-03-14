@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics - Mindset Analyzer{% endblock %}
+
+{% block content %}
+<!-- Detailed Analytics Section -->
+<div class="row mb-4">
+    <div class="col-md-8">
+        <div class="card analytics-card">
+            <div class="card-body">
+                <h5 class="card-title">Weekly Trends</h5>
+                <div class="chart-container">
+                    <canvas id="weeklyTrendsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card analytics-card">
+            <div class="card-body">
+                <h5 class="card-title">Monthly Comparison</h5>
+                <div class="chart-container">
+                    <canvas id="monthlyComparisonChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Factor Analysis Section -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card analytics-card">
+            <div class="card-body">
+                <h5 class="card-title">Factor Analysis</h5>
+                <div class="chart-container">
+                    <canvas id="factorAnalysisChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card analytics-card">
+            <div class="card-body">
+                <h5 class="card-title">Predictive Trends</h5>
+                <div class="chart-container">
+                    <canvas id="predictiveTrendsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Statistical Analysis Section -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Statistical Analysis</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="stats-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Mean</th>
+                                <th>Median</th>
+                                <th>Standard Deviation</th>
+                                <th>Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Stats will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+{% endblock %} 

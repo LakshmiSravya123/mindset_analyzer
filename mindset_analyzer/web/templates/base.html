@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mindset Analyzer{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3><i class='bx bx-brain'></i> Mindset Analyzer</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="{{ 'active' if request.endpoint == 'dashboard.index' }}">
+                    <a href="{{ url_for('dashboard.index') }}">
+                        <i class='bx bxs-dashboard'></i> Dashboard
+                    </a>
+                </li>
+                <li class="{{ 'active' if request.endpoint == 'dashboard.analytics' }}">
+                    <a href="{{ url_for('dashboard.analytics') }}">
+                        <i class='bx bx-line-chart'></i> Analytics
+                    </a>
+                </li>
+                <li class="mode-section">
+                    <a href="#modeSubmenu" data-bs-toggle="collapse" class="dropdown-toggle">
+                        <i class='bx bx-layer'></i> Modes
+                    </a>
+                    <ul class="collapse list-unstyled" id="modeSubmenu">
+                        <li class="{{ 'active' if request.endpoint == 'dashboard.spiritual' }}">
+                            <a href="{{ url_for('dashboard.spiritual') }}">
+                                <i class='bx bx-meditation'></i> Spiritual
+                            </a>
+                        </li>
+                        <li class="{{ 'active' if request.endpoint == 'dashboard.energy' }}">
+                            <a href="{{ url_for('dashboard.energy') }}">
+                                <i class='bx bx-battery'></i> Energy
+                            </a>
+                        </li>
+                        <li class="{{ 'active' if request.endpoint == 'dashboard.travel' }}">
+                            <a href="{{ url_for('dashboard.travel') }}">
+                                <i class='bx bx-map'></i> Travel
+                            </a>
+                        </li>
+                        <li class="{{ 'active' if request.endpoint == 'dashboard.creative' }}">
+                            <a href="{{ url_for('dashboard.creative') }}">
+                                <i class='bx bx-palette'></i> Creative
+                            </a>
+                        </li>
+                        <li class="{{ 'active' if request.endpoint == 'dashboard.learning' }}">
+                            <a href="{{ url_for('dashboard.learning') }}">
+                                <i class='bx bx-book-reader'></i> Learning
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="{{ 'active' if request.endpoint == 'dashboard.settings' }}">
+                    <a href="{{ url_for('dashboard.settings') }}">
+                        <i class='bx bx-cog'></i> Settings
+                    </a>
+                </li>
+                <li class="{{ 'active' if request.endpoint == 'dashboard.help' }}">
+                    <a href="{{ url_for('dashboard.help') }}">
+                        <i class='bx bx-help-circle'></i> Help
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-link text-primary">
+                        <i class='bx bx-menu fs-4'></i>
+                    </button>
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="mode-selector me-3">
+                            <select class="form-select" id="modeSelect">
+                                <option value="spiritual">Spiritual Mode</option>
+                                <option value="energy">Energy Mode</option>
+                                <option value="travel">Travel Mode</option>
+                                <option value="creative">Creative Mode</option>
+                                <option value="learning">Learning Mode</option>
+                            </select>
+                        </div>
+                        <div class="theme-toggle me-3">
+                            <button class="btn btn-outline-primary" id="themeToggle">
+                                <i class='bx bx-moon'></i>
+                            </button>
+                        </div>
+                        <div class="user-profile d-flex align-items-center">
+                            <img src="https://via.placeholder.com/32" class="rounded-circle" alt="Profile">
+                            <span class="ms-2 d-none d-md-inline text-primary">User</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content Area -->
+            <div class="container-fluid py-3">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading d-none">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+            const icon = themeToggle.querySelector('i');
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            const modeSelect = document.getElementById('modeSelect');
+            
+            // Load saved theme and mode
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const savedMode = localStorage.getItem('mode') || 'spiritual';
+            
+            html.setAttribute('data-theme', savedTheme);
+            modeSelect.value = savedMode;
+            
+            // Function to update icon
+            function updateIcon(isDark) {
+                icon.className = isDark ? 'bx bx-sun' : 'bx bx-moon';
+            }
+            
+            // Initialize icon based on current theme
+            updateIcon(savedTheme === 'dark');
+            
+            // Theme toggle
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                html.setAttribute('data-theme', newTheme);
+                updateIcon(newTheme === 'dark');
+                localStorage.setItem('theme', newTheme);
+            });
+            
+            // Mode selector
+            modeSelect.addEventListener('change', function() {
+                const newMode = this.value;
+                localStorage.setItem('mode', newMode);
+                // Update UI based on mode
+                updateModeUI(newMode);
+            });
+            
+            // Function to update UI based on mode
+            function updateModeUI(mode) {
+                // Update active states in sidebar
+                document.querySelectorAll('#modeSubmenu li').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.querySelector('a').getAttribute('href').includes(mode)) {
+                        item.classList.add('active');
+                    }
+                });
+                
+                // Update page content based on mode
+                const modeUrls = {
+                    spiritual: '/spiritual',
+                    energy: '/energy',
+                    travel: '/travel',
+                    creative: '/creative',
+                    learning: '/learning'
+                };
+                
+                window.location.href = modeUrls[mode];
+            }
+            
+            // Sidebar toggle with responsive behavior
+            document.getElementById('sidebarCollapse').addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+                content.classList.toggle('active');
+                
+                // Store sidebar state
+                localStorage.setItem('sidebarState', sidebar.classList.contains('active') ? 'open' : 'closed');
+            });
+            
+            // Restore sidebar state on page load
+            const sidebarState = localStorage.getItem('sidebarState');
+            if (sidebarState === 'open') {
+                sidebar.classList.add('active');
+                content.classList.add('active');
+            }
+            
+            // Close sidebar on mobile when clicking outside
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992 && 
+                    !sidebar.contains(e.target) && 
+                    !e.target.closest('#sidebarCollapse')) {
+                    sidebar.classList.remove('active');
+                    content.classList.remove('active');
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth <= 992) {
+                    sidebar.classList.remove('active');
+                    content.classList.remove('active');
+                }
+            });
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

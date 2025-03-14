@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block title %}Spiritual Journey - Mindset Analyzer{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Spiritual Overview Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class='bx bx-meditation'></i> Spiritual Overview</h5>
+                    <div class="time-period">
+                        <span class="badge bg-primary">This Week</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="metric-card">
+                                <div class="metric-icon">
+                                    <i class='bx bx-time'></i>
+                                </div>
+                                <h6>Meditation Time</h6>
+                                <div class="metric-value">45m</div>
+                                <div class="metric-change positive">
+                                    <i class='bx bx-up-arrow-alt'></i> 15% from last week
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="metric-card">
+                                <div class="metric-icon">
+                                    <i class='bx bx-heart'></i>
+                                </div>
+                                <h6>Mindfulness Score</h6>
+                                <div class="metric-value">8.5</div>
+                                <div class="metric-change positive">
+                                    <i class='bx bx-up-arrow-alt'></i> 5% from last week
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="metric-card">
+                                <div class="metric-icon">
+                                    <i class='bx bx-book-reader'></i>
+                                </div>
+                                <h6>Spiritual Reading</h6>
+                                <div class="metric-value">2h</div>
+                                <div class="metric-change positive">
+                                    <i class='bx bx-up-arrow-alt'></i> 20% from last week
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="metric-card">
+                                <div class="metric-icon">
+                                    <i class='bx bx-peace'></i>
+                                </div>
+                                <h6>Inner Peace</h6>
+                                <div class="metric-value">9.0</div>
+                                <div class="metric-change positive">
+                                    <i class='bx bx-up-arrow-alt'></i> 10% from last week
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meditation Practice Section -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-time'></i> Meditation Practice</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="meditationChart"></canvas>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Practice Streak</h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%">
+                                6/7 days
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-book-reader'></i> Daily Wisdom</h5>
+                </div>
+                <div class="card-body">
+                    <div class="daily-wisdom">
+                        <blockquote class="mb-3">
+                            "The journey of a thousand miles begins with one step."
+                        </blockquote>
+                        <p class="text-muted">- Lao Tzu</p>
+                        <button class="btn btn-primary w-100">
+                            <i class='bx bx-refresh'></i> New Wisdom
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Spiritual Insights Section -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-bulb'></i> Spiritual Insights</h5>
+                </div>
+                <div class="card-body">
+                    <div class="insight-item">
+                        <div class="insight-icon">
+                            <i class='bx bx-bulb'></i>
+                        </div>
+                        <div class="insight-content">
+                            <p class="insight-text">Your meditation practice has shown consistent improvement over the past month.</p>
+                            <div class="insight-impact positive">
+                                <i class='bx bx-trending-up'></i> Positive Impact
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-icon">
+                            <i class='bx bx-bulb'></i>
+                        </div>
+                        <div class="insight-content">
+                            <p class="insight-text">Morning meditation sessions have been more effective than evening ones.</p>
+                            <div class="insight-impact positive">
+                                <i class='bx bx-trending-up'></i> Pattern Identified
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-target-lock'></i> Spiritual Goals</h5>
+                </div>
+                <div class="card-body">
+                    <div class="goal-item mb-3">
+                        <h6>Daily Meditation</h6>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%">
+                                85%
+                            </div>
+                        </div>
+                        <small class="text-muted">Goal: 30 minutes daily</small>
+                    </div>
+                    <div class="goal-item mb-3">
+                        <h6>Mindful Reading</h6>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 60%">
+                                60%
+                            </div>
+                        </div>
+                        <small class="text-muted">Goal: 1 hour weekly</small>
+                    </div>
+                    <div class="goal-item">
+                        <h6>Gratitude Practice</h6>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%">
+                                40%
+                            </div>
+                        </div>
+                        <small class="text-muted">Goal: Daily gratitude journal</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guided Meditation Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-play-circle'></i> Guided Meditation</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="meditation-card">
+                                <div class="meditation-icon">
+                                    <i class='bx bx-play-circle'></i>
+                                </div>
+                                <h6>Mindful Breathing</h6>
+                                <p>10 minutes</p>
+                                <button class="btn btn-primary w-100">Start Session</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="meditation-card">
+                                <div class="meditation-icon">
+                                    <i class='bx bx-play-circle'></i>
+                                </div>
+                                <h6>Body Scan</h6>
+                                <p>15 minutes</p>
+                                <button class="btn btn-primary w-100">Start Session</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="meditation-card">
+                                <div class="meditation-icon">
+                                    <i class='bx bx-play-circle'></i>
+                                </div>
+                                <h6>Loving-Kindness</h6>
+                                <p>20 minutes</p>
+                                <button class="btn btn-primary w-100">Start Session</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Meditation Chart
+    const ctx = document.getElementById('meditationChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Meditation Duration (minutes)',
+                data: [30, 45, 35, 50, 40, 45, 45],
+                borderColor: '#4e73df',
+                tension: 0.4,
+                fill: true,
+                backgroundColor: 'rgba(78, 115, 223, 0.1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %} 

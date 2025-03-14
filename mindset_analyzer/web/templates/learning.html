@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+
+{% block title %}Learning Mode - Mindset Analyzer{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Learning Overview Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class='bx bx-book-reader'></i> Learning Overview</h5>
+                    <div class="time-period">
+                        <span class="badge bg-primary">This Week</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="metric-card">
+                                <div class="metric-icon">
+                                    <i class='bx bx-book'></i>
+                                </div>
+                                <h6>Courses</h6>
+                                <div class="metric-value">5</div>
+                                <div class="metric-change positive">
+                                    <i class='bx bx-up-arrow-alt'></i> 1 new this week
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="metric-card">
+                                <div class="metric-icon">
+                                    <i class='bx bx-time'></i>
+                                </div>
+                                <h6>Study Time</h6>
+                                <div class="metric-value">15h</div>
+                                <div class="metric-change positive">
+                                    <i class='bx bx-up-arrow-alt'></i> 2h more than last week
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="metric-card">
+                                <div class="metric-icon">
+                                    <i class='bx bx-bulb'></i>
+                                </div>
+                                <h6>Topics</h6>
+                                <div class="metric-value">8</div>
+                                <div class="metric-change positive">
+                                    <i class='bx bx-up-arrow-alt'></i> 2 new topics
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="metric-card">
+                                <div class="metric-icon">
+                                    <i class='bx bx-check-circle'></i>
+                                </div>
+                                <h6>Completed</h6>
+                                <div class="metric-value">3</div>
+                                <div class="metric-change positive">
+                                    <i class='bx bx-up-arrow-alt'></i> 1 more than last week
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning Progress Section -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-line-chart'></i> Learning Progress</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="learningChart"></canvas>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Weekly Learning Score</h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%">
+                                85%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-bulb'></i> Learning Tips</h5>
+                </div>
+                <div class="card-body">
+                    <div class="learning-tips">
+                        <div class="tip-item">
+                            <i class='bx bx-check-circle'></i>
+                            <p>Take regular breaks to retain information</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class='bx bx-check-circle'></i>
+                            <p>Practice active recall</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class='bx bx-check-circle'></i>
+                            <p>Teach others what you learn</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class='bx bx-check-circle'></i>
+                            <p>Create mind maps for complex topics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning Insights Section -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-bulb'></i> Learning Insights</h5>
+                </div>
+                <div class="card-body">
+                    <div class="insight-item">
+                        <div class="insight-icon">
+                            <i class='bx bx-bulb'></i>
+                        </div>
+                        <div class="insight-content">
+                            <p class="insight-text">Your learning retention is highest in the morning.</p>
+                            <div class="insight-impact positive">
+                                <i class='bx bx-trending-up'></i> Pattern Identified
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-icon">
+                            <i class='bx bx-bulb'></i>
+                        </div>
+                        <div class="insight-content">
+                            <p class="insight-text">Group study sessions improve understanding by 40%.</p>
+                            <div class="insight-impact positive">
+                                <i class='bx bx-trending-up'></i> Positive Impact
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-target-lock'></i> Learning Goals</h5>
+                </div>
+                <div class="card-body">
+                    <div class="goal-item mb-3">
+                        <h6>Course Completion</h6>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%">
+                                75%
+                            </div>
+                        </div>
+                        <small class="text-muted">Goal: Complete 5 courses</small>
+                    </div>
+                    <div class="goal-item mb-3">
+                        <h6>Study Hours</h6>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 60%">
+                                60%
+                            </div>
+                        </div>
+                        <small class="text-muted">Goal: 20 hours weekly</small>
+                    </div>
+                    <div class="goal-item">
+                        <h6>New Skills</h6>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%">
+                                40%
+                            </div>
+                        </div>
+                        <small class="text-muted">Goal: Master 3 new skills</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning Tools Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class='bx bx-tools'></i> Learning Tools</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="learning-card">
+                                <div class="learning-icon">
+                                    <i class='bx bx-book-reader'></i>
+                                </div>
+                                <h6>Course Library</h6>
+                                <p>Browse courses</p>
+                                <button class="btn btn-primary w-100">View Library</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="learning-card">
+                                <div class="learning-icon">
+                                    <i class='bx bx-note'></i>
+                                </div>
+                                <h6>Study Notes</h6>
+                                <p>Organize knowledge</p>
+                                <button class="btn btn-primary w-100">View Notes</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="learning-card">
+                                <div class="learning-icon">
+                                    <i class='bx bx-group'></i>
+                                </div>
+                                <h6>Study Groups</h6>
+                                <p>Learn together</p>
+                                <button class="btn btn-primary w-100">Join Group</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Learning Chart
+    const ctx = document.getElementById('learningChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Learning Activity',
+                data: [4, 3, 5, 4, 3, 4, 5],
+                borderColor: '#4e73df',
+                tension: 0.4,
+                fill: true,
+                backgroundColor: 'rgba(78, 115, 223, 0.1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %} 
