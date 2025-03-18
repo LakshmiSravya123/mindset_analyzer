@@ -1,5 +1,5 @@
 from flask import Flask
-from routes import dashboard
+from .routes import dashboard
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-here'
